@@ -1,6 +1,6 @@
 {
   "name": "ms-start",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Metalsmith starter scaffolding tool",
   "main": "bin/index.js",
   "scripts": {
