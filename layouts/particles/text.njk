@@ -1,0 +1,21 @@
+{% if params.text.prefix %}
+  <p class="prefix">{{ params.text.prefix }}</p>
+{% endif %}
+
+{% if params.text.title %}
+  {% if params.text.header === "h1" %}
+    <h1 class="title">{{ params.text.title }}</h1>
+  {% elif params.text.header === "h2" %}
+    <h2 class="title">{{ params.text.title }}</h2>
+  {% else %}
+    <h3 class="title">{{ params.text.title }}</h3>
+  {% endif %}
+{% endif %}
+
+{% if params.text.subtitle %}
+  <p class="sub-title">{{ params.text.subtitle }}</p>
+{% endif %}
+
+{% if params.text.prose %}
+  <div class="prose">{{ params.text.prose | mdToHTML | safe }}</div>
+{% endif %}

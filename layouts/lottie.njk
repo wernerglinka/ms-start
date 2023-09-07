@@ -1,0 +1,31 @@
+{#
+  Lottie animation
+  Renders a lottie animation
+
+  Dependency: https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js
+  
+  params: {
+    lottie: {
+      src: string
+      control: {
+        autoplay: boolean
+        loop: boolean
+      }
+    }
+  }
+
+  YAML example:
+  lottie:
+    src: ''
+    control:
+      autoplay: true
+      loop: true
+#}
+
+<div class="lottie-wrapper section-inner">
+  <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script>
+  <div class="animation">
+    <lottie-player src="{{ params.lottie.src}}" background="transparent"  speed="1" loop autoplay></lottie-player>
+  </div>
+  <p class="caption">{{ params.caption }}</p>
+</div>

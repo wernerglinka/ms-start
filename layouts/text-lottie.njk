@@ -1,0 +1,69 @@
+{#
+  Text & lottie
+  Renders text with an optional CTA and a lottie animation graphic.
+  
+  params: {
+    isReverse: boolean - whether the image should be on the left or right (default)
+    hasCta: boolean - whether the text should have a CTA
+    text: {
+      prefix: string - prefix to the title (optional)
+      title: string - title of the blog post (optional)
+      header: string - header of the blog post, e.g. "h1", "h2", etc. (optional)
+      subtitle: string - subtitle of the blog post (optional)
+      prose: string - prose of the blog post (optional)
+    }
+    ctas: {
+      url: "",
+      label: "",
+      isExternal: true,
+      isButton: true,
+      buttonStyle: "primary"
+    }
+    lottie: {
+      src: string
+      control: {
+        autoplay: boolean
+        loop: boolean
+      }
+    }
+  }
+
+  YAML example:
+  isReverse: false
+  hasCta: false
+  text:
+    prefix: ""
+    title: ""
+    header: ""
+    subtitle: ""
+    prose: ""
+  ctas:
+    - url: ""
+      label: ""
+      isExternal: true
+      isButton: true
+      buttonStyle: "primary"
+  lottie:
+    src: ''
+    control:
+      autoplay: true
+      loop: true
+#}
+
+
+
+<div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
+  
+  {% include "sections/particles/text.njk" %}
+
+  {% include "sections/particles/ctas.njk" %}
+  
+  <div class="lottie">
+  <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script>
+  <div class="animation">
+    <lottie-player src="{{ params.lottie.src}}" background="transparent"  speed="1" loop autoplay></lottie-player>
+  </div>
+  <p class="caption">{{ params.caption }}</p>
+</div>
+
+</div>

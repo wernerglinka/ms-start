@@ -1,0 +1,22 @@
+{#
+  renders an icon
+  Renders an icon with a caption
+  
+  params: {
+    icon: {
+      name: string - name of the feather icon see https://feathericons.com/
+      caption: string - caption of the icon
+    }
+
+  }
+
+  YAML example:
+  icon:
+    name: ''
+    caption: ''
+#}
+
+<div class="icon-wrapper section-inner">
+  {% include "../icons/" + params.icon.name + ".njk" ignore missing %}
+  <p class="caption">{{ params.icon.caption }}</p>
+</div>

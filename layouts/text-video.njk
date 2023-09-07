@@ -1,0 +1,96 @@
+{#
+  Text & Video
+  Renders text with an optional CTA and a video either inline or in a modal.
+  
+  params: {
+    isReverse: boolean - whether the image should be on the left or right (default)
+    hasCta: boolean - whether the text should have a CTA
+    text: {
+      prefix: string - prefix to the title (optional)
+      title: string - title of the blog post (optional)
+      header: string - header of the blog post, e.g. "h1", "h2", etc. (optional)
+      subtitle: string - subtitle of the blog post (optional)
+      prose: string - prose of the blog post (optional)
+    }
+    ctas: {
+      url: "",
+      label: "",
+      isExternal: true,
+      isButton: true,
+      buttonStyle: "primary"
+    }
+    video: {
+      title: string - video title (optional)
+      inline: boolean - false if video should be rendered in a modal (optional)
+      src: string - the video source, for exampple "youtube" (default)
+      id: string - video id, for example "v=123456789"
+      tn: string - thumbnail image url
+      start: string - start time in seconds
+      end: string - end time in seconds
+    }
+  }
+
+  YAML example:
+  isReverse: false
+  hasCta: false
+  text:
+    prefix: ""
+    title: ""
+    header: ""
+    subtitle: ""
+    prose: ""
+  ctas:
+    - url: ""
+      label: ""
+      isExternal: true
+      isButton: true
+      buttonStyle: "primary"
+  video:
+    title: ""
+    inline: ""
+    src: ""
+    id: ""
+    tn: ""
+    start: ""
+    end: ""
+#}
+
+
+
+<div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
+  
+  {% include "sections/particles/text.njk" %}
+
+  {% include "sections/particles/ctas.njk" %}
+  
+  {% if params.video.inline %}
+    <div class="video inline">
+      <div class="inline-video-wrapper js-inline-video-wrapper">
+        <div class="close">{% include "../icons/x.njk" %}</div>
+        <div 
+          class="js-inline-video" 
+          data-videoid="{{ params.video.id }}" 
+          data-starttime="{{ params.video.start }}" 
+          data-endtime="{{ params.video.end }}"
+        ></div>
+      </div>
+    
+      <button class="video-trigger js-video-trigger">
+        <div class="play-button">{% include "../icons/play.njk" %}</div>
+        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
+      </button>
+    </div>
+  {% else %}
+    <div class="video" >
+      <button 
+        class="js-modal-video" 
+        data-videoid={{ params.video.id}} 
+        data-videosrc={{ params.video.src }}
+      >
+        <div class="play-button">{% include "../icons/play.njk" %}</div>
+        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
+      </button>
+    </div>
+  {% endif %}
+
+</div><!-- /.text-video-wrapper -->

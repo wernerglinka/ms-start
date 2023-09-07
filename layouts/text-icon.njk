@@ -1,0 +1,61 @@
+{#
+  Text & Icon
+  Renders text with an optional CTA and an icon.
+  
+  params: {
+    isReverse: boolean - whether the image should be on the left or right (default)
+    hasCta: boolean - whether the text should have a CTA
+    text: {
+      prefix: string - prefix to the title (optional)
+      title: string - title of the blog post (optional)
+      header: string - header of the blog post, e.g. "h1", "h2", etc. (optional)
+      subtitle: string - subtitle of the blog post (optional)
+      prose: string - prose of the blog post (optional)
+    }
+    ctas: {
+      url: "",
+      label: "",
+      isExternal: true,
+      isButton: true,
+      buttonStyle: "primary"
+    }
+    icon: {
+      name: string - name of the feather icon see https://feathericons.com/
+      caption: string - caption of the icon
+    }
+  }
+
+  YAML example:
+  isReverse: false
+  hasCta: false
+  text:
+    prefix: ""
+    title: ""
+    header: ""
+    subtitle: ""
+    prose: ""
+  ctas:
+    - url: ""
+      label: ""
+      isExternal: true
+      isButton: true
+      buttonStyle: "primary"
+  icon:
+    name: ''
+    caption: ''
+#}
+
+
+
+<div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
+  
+  {% include "sections/particles/text.njk" %}
+
+  {% include "sections/particles/ctas.njk" %}
+  
+  <div class="icon {% if params.icon.caption %}has-caption{% endif %}">
+    {% include "../icons/" + params.icon.name + ".njk" ignore missing %}
+    <p class="caption">{{ params.icon.caption }}</p>
+  </div><!-- /.image -->
+
+</div>

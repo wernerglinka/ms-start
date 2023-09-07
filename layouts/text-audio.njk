@@ -1,0 +1,81 @@
+{#
+  Text & Audio
+  Renders text with an optional CTA and an audio player with an optional background image.
+  
+  params: {
+    isReverse: boolean - whether the image should be on the left or right (default)
+    hasCta: boolean - whether the text should have a CTA
+    hasImage: boolean - whether the audio player has a background image
+    text: {
+      prefix: string - prefix to the title (optional)
+      title: string - title of the blog post (optional)
+      header: string - header of the blog post, e.g. "h1", "h2", etc. (optional)
+      subtitle: string - subtitle of the blog post (optional)
+      prose: string - prose of the blog post (optional)
+    }
+    ctas: {
+      url: "",
+      label: "",
+      isExternal: true,
+      isButton: true,
+      buttonStyle: "primary"
+    }
+    audio: {
+      ogg: string
+      mpeg: string
+    }
+    image: {
+      src: string - the image id
+      alt: string - the alt text
+      caption: string - the caption
+    }
+  }
+
+  YAML example:
+  isReverse: false
+  hasCta: false
+  hasImage: false
+  text:
+    prefix: ""
+    title: ""
+    header: ""
+    subtitle: ""
+    prose: ""
+  ctas:
+    - url: ""
+      label: ""
+      isExternal: true
+      isButton: true
+      buttonStyle: "primary"
+  audio:
+    ogg: ""
+    mpeg: ""
+  image:
+    src: ""
+    alt: ""
+    caption: ""
+#}
+
+
+
+<div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
+  
+  {% include "sections/particles/text.njk" %}
+
+  {% include "sections/particles/ctas.njk" %}
+  
+  <div class="audio">
+    {% if params.hasImage %}
+      <div class="audio-image">
+        <img src="{{ params.image.src }}" alt="{{ params.image.alt }}">
+      </div><!-- /.audio-image -->
+    {% endif %}
+
+    <audio controls>
+      <source src={{params.audio.ogg}} type="audio/ogg"/>
+      <source src={{params.audio.mpeg}} type="audio/mpeg"/>
+      Your browser does not support the audio element.
+    </audio>
+  </div><!-- /.audio -->
+
+</div>

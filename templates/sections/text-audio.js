@@ -1,0 +1,12 @@
+const ctas = require('./ctas');
+const text = require('./text');
+const audio = require('./audio');
+const image = require('./image');
+// merge commons with image object
+const merged = Object.assign(audio, image, text, ctas);
+// add directional property for media type section
+merged.isReverse = false;
+merged.hasCtas = false;
+merged.hasImage = false;
+
+module.exports = merged;

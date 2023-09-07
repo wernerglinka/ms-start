@@ -1,0 +1,22 @@
+.text-media-wrapper .icon {
+  grid-area: media;
+  position: relative;
+
+  & svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  & .caption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: var(--caption-background);
+    color: var(--caption-color);
+  }
+}

@@ -1,0 +1,98 @@
+.text-media-wrapper {
+  display: grid;
+  column-gap: 2rem;
+  grid-template-columns: [first] 1fr [second] 1fr [last];
+  grid-template-rows: 1fr min-content min-content min-content min-content min-content 1fr;
+  grid-template-areas:
+    "media ."
+    "media prefix"
+    "media title"
+    "media sub-title"
+    "media prose"
+    "media ctas"
+    "media .";
+  
+  &.is-reverse {
+    grid-template-areas:
+      ". media"
+      "prefix media"
+      "title media"
+      "sub-title media"
+      "prose media"
+      "ctas media"
+      ". media";
+  }
+
+  & .prefix {
+    grid-area: prefix;
+    align-self: start;
+  }
+
+  & .title {
+    grid-area: title;
+    align-self: start;
+    margin: 0;
+  }
+
+  & .sub-title {
+    grid-area: sub-title;
+    align-self: start;
+    margin: 0 0 1rem;
+    color: var(--color-gray);
+  }
+
+  & .prose {
+    grid-area: prose;
+    align-self: start;
+
+    & :first-child {
+      margin-top: 0;
+    }
+
+    & :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & .ctas {
+    grid-area: ctas;
+    margin: 2rem 0 0;
+    align-self: start;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "prefix"
+      "title"
+      "sub-title"
+      "media"
+      "prose";
+
+    &.is-reverse {
+      grid-template-areas:
+        "prefix"
+        "title"
+        "sub-title"
+        "media"
+        "prose"
+        "ctas";
+    }
+      
+    .prefix,
+    .title,
+    .sub-title,
+    .prose {
+      margin: 0;
+    }
+
+    .sub-title {
+      margin: 0 0 1rem;
+    }
+    
+    .prose {
+      margin-top: 1rem;
+    }
+  }
+}

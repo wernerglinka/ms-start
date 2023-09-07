@@ -1,0 +1,22 @@
+{#
+  Text
+  Renders audio player
+  
+  params: {
+    ogg: string
+    mpeg: string
+  }
+
+  YAML example:
+  audio:
+      ogg: ""
+      mpeg: ""
+#}
+
+<div class="audio-wrapper section-inner">
+  <audio controls>
+    <source src={{params.audio.ogg}} type="audio/ogg"/>
+    <source src={{params.audio.mpeg}} type="audio/mpeg"/>
+    Your browser does not support the audio element.
+  </audio>
+</div>

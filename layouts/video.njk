@@ -1,0 +1,65 @@
+{#
+  Video
+  Renders a video either inline or in a modal. Modal videos may be triggered clicking on a thumbnail image
+  as provided in this template. However, they can also triggered by a simple text link.
+  For example: <a class="js-modal-video" data-videoid="yC_j_dzkaVE" href="">Click here for a video</a>
+
+  
+  params: {
+    video: {
+      title: string - video title (optional)
+      inline: boolean - false if video should be rendered in a modal (optional)
+      src: string - the video source, for exampple "youtube" (default)
+      id: string - video id, for example "v=123456789"
+      tn: string - thumbnail image url
+      start: string - start time in seconds
+      end: string - end time in seconds
+    }
+  }
+
+  YAML example:
+  video:
+    title: ""
+    inline: ""
+    src: ""
+    id: ""
+    tn: ""
+    start: ""
+    end: ""
+#}
+
+
+
+<div class="video-wrapper section-inner">
+
+  {% if params.video.inline %}
+    <div class="video inline">
+      <div class="inline-video-wrapper js-inline-video-wrapper">
+        <div class="close">{% include "../icons/x.njk" %}</div>
+        <div 
+          class="js-inline-video" 
+          data-videoid="{{ params.video.id }}" 
+          data-starttime="{{ params.video.start }}" 
+          data-endtime="{{ params.video.end }}"
+        ></div>
+      </div>
+    
+      <button class="video-trigger js-video-trigger">
+        <div class="play-button">{% include "../icons/play.njk" %}</div>
+        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
+      </button>
+    </div>
+  {% else %}
+    <div class="video" >
+      <button 
+        class="js-modal-video" 
+        data-videoid={{ params.video.id}} 
+        data-videosrc={{ params.video.src }}
+      >
+        <div class="play-button">{% include "../icons/play.njk" %}</div>
+        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
+      </button>
+    </div>
+  {% endif %}
+
+</div>

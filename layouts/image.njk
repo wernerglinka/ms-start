@@ -1,0 +1,23 @@
+{#
+  Image
+  Renders an image with a caption
+  
+  params: {
+    image: {
+      src: string - the image id
+      alt: string - the alt text
+      caption: string - the caption
+    }
+  }
+
+  YAML example:
+  image:
+    src: ''
+    alt: ''
+    caption: ''
+#}
+
+<div class="image-wrapper section-inner">
+  <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" />
+  <p class="caption">{{ params.image.caption }}</p>
+</div>

@@ -1,0 +1,65 @@
+{#
+  Text & Image
+  Renders text with an optional CTA and an image.
+  
+  params: {
+    isReverse: boolean - whether the image should be on the left or right (default)
+    hasCta: boolean - whether the text should have a CTA
+    text: {
+      prefix: string - prefix to the title (optional)
+      title: string - title of the blog post (optional)
+      header: string - header of the blog post, e.g. "h1", "h2", etc. (optional)
+      subtitle: string - subtitle of the blog post (optional)
+      prose: string - prose of the blog post (optional)
+    }
+    ctas: {
+      url: "",
+      label: "",
+      isExternal: true,
+      isButton: true,
+      buttonStyle: "primary"
+    }
+    image: {
+      src: string - the image id
+      alt: string - the alt text
+      caption: string - the caption
+    }
+  }
+
+  YAML example:
+  isReverse: false
+  hasCta: false
+  text:
+    prefix: ""
+    title: ""
+    header: ""
+    subtitle: ""
+    prose: ""
+  ctas:
+    - url: ""
+      label: ""
+      isExternal: true
+      isButton: true
+      buttonStyle: "primary"
+  image:
+    src: ""
+    alt: ""
+    caption: ""
+#}
+
+
+
+<div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
+  
+  {% include "sections/particles/text.njk" %}
+
+  {% include "sections/particles/ctas.njk" %}
+  
+  <div class="image {% if params.image.caption %}has-caption{% endif %}">
+    <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" />
+    {% if params.image.caption %}
+      <p class="caption">{{ params.image.caption }}</p>
+    {% endif %}
+  </div><!-- /.image -->
+
+</div>

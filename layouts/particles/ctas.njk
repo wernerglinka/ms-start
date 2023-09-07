@@ -1,0 +1,19 @@
+{% if params.hasCtas %}
+  <div class="ctas">  
+    {% for cta in params.ctas %}
+      {% if cta.isButton %}
+        {% if cta.isExternal %}
+          <a class="button-link {{ cta.buttonStyle }}" href="{{cta.url}}" target="_blank" rel="noopener noreferrer">{{ cta.label}}</a>
+        {% else %}
+          <a class="button-link {{ cta.buttonStyle }}" href="{{cta.url}}">{{ cta.label}}</a>
+        {% endif %}
+      {% else %}
+        {% if cta.isExternal %}
+          <a class="text-link" href="{{cta.url}}" target="_blank" rel="noopener noreferrer">{{ cta.label}}</a>
+        {% else %}
+          <a class="text-link" href="{{cta.url}}">{{ cta.label}}</a>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div><!-- /.ctas-wrapper -->
+{% endif %}
