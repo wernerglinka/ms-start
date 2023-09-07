@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "werner@glinka.co",
   "license": "MIT",
   "dependencies": {
     "@inquirer/confirm": "^2.0.10",
@@ -22,5 +22,8 @@
   },
   "bin": {
     "ms-start": "./bin/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

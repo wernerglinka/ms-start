@@ -196,11 +196,6 @@ async function init(projectName) {
 	// Initialize a new git repository
 	execSync('git init');
 	userMsg(`Initialized new git repository`, true);
-	userMsg(`Starting development server`, true);
-	userHint(`Have a look at the page. To start working on your new site, stop the dev server with "ctrl-c" then change to the "${projectName}" directory with "cd ${projectName}" and start the dev server again with "npm start".`);
-
-	// Start a development server with the site
-	execSync('npm start');
 }
 
 /**
