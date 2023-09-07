@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Metalsmith First" src="https://github.com/wernerglinka/metalsmith-start/blob/main/msstart.png?raw=true" width="100" />
+  <img alt="Metalsmith First" src="https://github.com/wernerglinka/ms-start/blob/main/msstart.png?raw=true" width="100" />
 </p>
 
 <h1 align="center">Metalsmith Start<h1>
