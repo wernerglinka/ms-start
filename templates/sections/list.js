@@ -1,6 +1,7 @@
 const list = {
   "list": {
     "source": "",
+    "template": "",
     "selections": [
       {title: "item1"}, 
       {title: "item2"}, 

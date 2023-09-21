@@ -1,0 +1,35 @@
+{#
+  List
+  Renders a list of items with a specified template
+  
+  params: {
+    source: string - the source of the list
+    template: string - the template to use for each item
+    selections: [
+      {title: string, value: string}
+      ...
+    ]
+  }
+
+  YAML example:
+  source: ''
+  template: ''
+  selections:
+    - title: ''
+      value: ''
+    - title: ''
+      value: ''
+    ...
+#}
+
+<div class="list-wrapper section-inner">
+  {% set source = params.list.source %}
+  {% set template = params.list.template %}
+  {% set selections = params.list.selections %}
+
+  {# get the selected items from the source list #}
+  {% set items = source | filterList(selections) %}
+  
+  {% include "./sections/particles/" + template + ".njk" ignore missing %}
+</div>
+
