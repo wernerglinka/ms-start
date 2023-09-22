@@ -1,0 +1,9 @@
+<ul class="logo-list">
+  {% for select in selection %}
+    <li>
+      <a href="{{ select.url }}">
+        <img src="{{ select.logo }}" alt="{{ select.item }}" />
+      </a>
+    </li>
+  {% endfor %}
+</ul>

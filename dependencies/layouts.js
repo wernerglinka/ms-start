@@ -2,7 +2,7 @@ module.exports = {
     "audio": ["audio"],
     "icon": ["icon"],
     "image": ["image"],
-    "list": ["list", "particles/simple-list"],
+    "list": ["list", "particles/logo-list"],
     "lottie": ["lottie"],
     "text" : ["text", "particles/text", "particles/ctas"] ,
     "text-audio" : ["text-audio", "particles/text", "particles/ctas"],
