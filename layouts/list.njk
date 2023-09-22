@@ -28,8 +28,9 @@
   {% set selections = params.list.selections %}
 
   {# get the selected items from the source list #}
-  {% set items = source | filterList(selections) %}
+  {# refData is a meta variable that contains data for the site #}
+  {% set selection = refData[source] | filterList(selections) %}
   
-  {% include "./sections/particles/" + template + ".njk" ignore missing %}
+  {% include "sections/particles/" + template + ".njk" ignore missing %}
 </div>
 
