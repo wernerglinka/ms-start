@@ -3,9 +3,9 @@ const list = {
     "source": "",
     "template": "",
     "selections": [
-      {title: "item1"}, 
-      {title: "item2"}, 
-      {title: "item3"}
+      {id: "item1"}, 
+      {id: "item2"}, 
+      {id: "item3"}
     ]
   }
 }

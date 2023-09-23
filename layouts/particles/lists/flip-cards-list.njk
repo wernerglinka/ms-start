@@ -1,0 +1,15 @@
+<ul class="flip-cards-list">
+  {% for select in selection %}
+    <li class="flip-card-wrapper">
+      <div class="flip-card">
+        <img src="{{ select.logo }}" alt="{{ select.title }}" />
+        <h3>{{ select.title }}</h3>
+      </div>
+      <div class="flip-card-back">
+        <h3>{{ select.title }}</h3>
+        <p>{{ select.description }}</p>
+        <a href="{{ select.url }}">Learn More</a>
+      </div>
+    </li>
+  {% endfor %}
+</ul>

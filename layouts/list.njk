@@ -31,6 +31,6 @@
   {# refData is a meta variable that contains data for the site #}
   {% set selection = refData[source] | filterList(selections) %}
   
-  {% include "sections/particles/" + template + ".njk" ignore missing %}
+  {% include "sections/particles/lists/" + template + ".njk" ignore missing %}
 </div>
 
