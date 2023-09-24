@@ -29,7 +29,7 @@
 
   {# get the selected items from the source list #}
   {# refData is a meta variable that contains data for the site #}
-  {% set selection = refData[source] | filterList(selections) %}
+  {% set selection = refData[source] | getSelections(selections) %}
   
   {% include "sections/particles/lists/" + template + ".njk" ignore missing %}
 </div>
