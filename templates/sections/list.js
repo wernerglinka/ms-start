@@ -2,6 +2,8 @@ const list = {
   "list": {
     "source": "",
     "template": "",
+    "imageWidth": "",
+    "selectAll": "false",
     "selections": [
       {id: "item1"}, 
       {id: "item2"}, 

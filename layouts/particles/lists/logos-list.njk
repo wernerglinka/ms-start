@@ -1,9 +1,27 @@
-<ul class="logos-list">
-  {% for select in selection %}
-    <li>
-      <a href="{{ select.url }}">
-        <img src="{{ select.logo }}" alt="{{ select.title }}" />
-      </a>
-    </li>
-  {% endfor %}
-</ul>
+{% set copies = 2 %}
+{% set logoWidth = params.list.imageWidth %}
+{% set logosListLength = selection | length  *  logoWidth %}
+
+<div class="logos-list-display">
+  <div 
+    class="marquee" 
+    style="
+      --list-width: {{ logosListLength ~ "px" }}; 
+      --logo-width: {{ logoWidth ~ 'px'}}
+    ">
+    <div class="logos-wrapper js-logos-wrapper">
+
+      {% for i in range(0, copies) -%}
+      <ul class="logos js-logos">
+      {% for select in selection %}
+        <li>
+          <a href="{{ select.url }}">
+            <img src="{{ select.image }}" alt="{{ select.title }}" />
+          </a>
+        </li>
+      {% endfor %}
+      </ul>
+      {% endfor %}
+    </div> <!-- marquee-inner -->
+  </div> <!-- marquee -->
+</div> <!-- logos-list-display -->
