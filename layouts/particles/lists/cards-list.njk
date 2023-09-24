@@ -1,12 +1,9 @@
+{% from "sections/particles/card.njk" import card %}
+
 <ul class="cards-list">
   {% for select in selection %}
-    <li class="card">
-      <img src="{{ select.logo }}" alt="{{ select.title }}" />
-      <div class="card-content">
-        <h3>{{ select.title }}</h3>
-        <p>{{ select.description }}</p>
-        <a href="{{ select.url }}">Learn More</a>
-      </div>
+    <li>
+      {{ card(select) }}
     </li>
   {% endfor %}
 </ul>
