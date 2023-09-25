@@ -1,7 +1,11 @@
 <ul class="simple-list">
   {% for select in selection %}
-    <li>
-      <a href="{{ select.url }}">{{ select.title }}</a>
+    <li class="{% if not select.url %}no-link{% endif %}">
+      {% if select.url %}
+        <a href="{{ select.url }}">{{ select.title }}</a>
+      {% else %}
+        {{ select.title }}
+      {% endif %}
     </li>
   {% endfor %}
 </ul>

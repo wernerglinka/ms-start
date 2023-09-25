@@ -3,7 +3,7 @@ const list = {
     "source": "",
     "template": "",
     "imageWidth": "",
-    "selectAll": "false",
+    "selectAll": false,
     "selections": [
       {id: "item1"}, 
       {id: "item2"}, 

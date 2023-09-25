@@ -5,7 +5,9 @@
     </div>
     <h3 class="title">{{ props.title }}</h3>
     <p class="prose">{{ props.description }}</p>
-    <a class="link" href="{{ props.url }}">Learn More</a>
+    {% if props.url %}
+      <a class="link" href="{{ props.url }}">Learn More</a>
+    {% endif %}
   </div>
 {% endmacro %}
 

@@ -14,10 +14,14 @@
       {% for i in range(0, copies) -%}
       <ul class="logos js-logos">
       {% for select in selection %}
-        <li>
-          <a href="{{ select.url }}">
+        <li class="{% if not select.url %}no-link{% endif %}">
+          {% if select.url %}
+            <a href="{{ select.url }}">
+              <img src="{{ select.image }}" alt="{{ select.title }}" />
+            </a>
+          {% else %}
             <img src="{{ select.image }}" alt="{{ select.title }}" />
-          </a>
+          {% endif %}
         </li>
       {% endfor %}
       </ul>

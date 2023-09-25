@@ -8,7 +8,9 @@
         <div class="flip-card-back">
           <h3>{{ select.title }}</h3>
           <p>{{ select.description }}</p>
+          {% if select.url %}
           <a href="{{ select.url }}">Learn More</a>
+          {% endif %}
         </div>
       </div>
     </li>

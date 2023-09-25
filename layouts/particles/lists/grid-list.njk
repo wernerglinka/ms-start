@@ -1,0 +1,13 @@
+<ul class="grid-list">
+  {% for select in selection %}
+    <li class="{% if not select.url %}no-link{% endif %}">
+      {% if select.url %}
+      <a href="{{ select.url }}">
+        <img src="{{ select.image }}" alt="{{ select.title }}">
+      </a>
+      {% else %}
+        <img src="{{ select.image }}" alt="{{ select.title }}">
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
