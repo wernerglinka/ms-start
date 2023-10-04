@@ -12,11 +12,8 @@
       ogg: ""
       mpeg: ""
 #}
+{% from "sections/particles/audio.njk" import audio %}
 
 <div class="audio-wrapper section-inner">
-  <audio controls>
-    <source src={{params.audio.ogg}} type="audio/ogg"/>
-    <source src={{params.audio.mpeg}} type="audio/mpeg"/>
-    Your browser does not support the audio element.
-  </audio>
+  {{ audio(params) }}
 </div>

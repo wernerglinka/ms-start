@@ -52,18 +52,12 @@
 
 
 
+{% from "sections/particles/text.njk" import text %}
+{% from "sections/particles/lottie.njk" import lottie %}
+{% from "sections/particles/ctas.njk" import ctas %}
+
 <div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
-  
-  {% include "sections/particles/text.njk" %}
-
-  {% include "sections/particles/ctas.njk" %}
-  
-  <div class="lottie">
-  <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script>
-  <div class="animation">
-    <lottie-player src="{{ params.lottie.src}}" background="transparent"  speed="1" loop autoplay></lottie-player>
-  </div>
-  <p class="caption">{{ params.caption }}</p>
-</div>
-
+  {{ text(params) }}
+  {{ lottie(params) }}
+  {{ ctas(params) }}
 </div>

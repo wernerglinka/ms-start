@@ -47,15 +47,12 @@
 
 
 
+{% from "sections/particles/text.njk" import text %}
+{% from "sections/particles/icon.njk" import icon %}
+{% from "sections/particles/ctas.njk" import ctas %}
+
 <div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
-  
-  {% include "sections/particles/text.njk" %}
-
-  {% include "sections/particles/ctas.njk" %}
-  
-  <div class="icon {% if params.icon.caption %}has-caption{% endif %}">
-    {% include "../icons/" + params.icon.name + ".njk" ignore missing %}
-    <p class="caption">{{ params.icon.caption }}</p>
-  </div><!-- /.image -->
-
+  {{ text(params) }}
+  {{ icon(params) }}
+  {{ ctas(params) }}
 </div>

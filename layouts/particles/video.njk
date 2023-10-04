@@ -1,0 +1,31 @@
+{% macro video(props) %}
+  {% if props.video.inline %}
+    <div class="video inline">
+      <div class="inline-video-wrapper js-inline-video-wrapper">
+        <div class="close">{% include "icons/x.njk" %}</div>
+        <div 
+          class="js-inline-video" 
+          data-videoid="{{ props.video.id }}" 
+          data-starttime="{{ props.video.start }}" 
+          data-endtime="{{ props.video.end }}"
+        ></div>
+      </div>
+    
+      <button class="video-trigger js-video-trigger">
+        <div class="play-button">{% include "icons/play.njk" %}</div>
+        <img src="{{ props.video.tn }}" alt="{{ props.video.title }}">
+      </button>
+    </div>
+  {% else %}
+    <div class="video" >
+      <button 
+        class="js-modal-video" 
+        data-videoid={{ props.video.id}} 
+        data-videosrc={{ props.video.src }}
+      >
+        <div class="play-button">{% include "icons/play.njk" %}</div>
+        <img src="{{ props.video.tn }}" alt="{{ props.video.title }}">
+      </button>
+    </div>
+  {% endif %}
+{% endmacro %}

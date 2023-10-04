@@ -28,38 +28,8 @@
     end: ""
 #}
 
-
+{% from "page-sections/particles/video.njk" import video %}
 
 <div class="video-wrapper section-inner">
-
-  {% if params.video.inline %}
-    <div class="video inline">
-      <div class="inline-video-wrapper js-inline-video-wrapper">
-        <div class="close">{% include "../icons/x.njk" %}</div>
-        <div 
-          class="js-inline-video" 
-          data-videoid="{{ params.video.id }}" 
-          data-starttime="{{ params.video.start }}" 
-          data-endtime="{{ params.video.end }}"
-        ></div>
-      </div>
-    
-      <button class="video-trigger js-video-trigger">
-        <div class="play-button">{% include "../icons/play.njk" %}</div>
-        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
-      </button>
-    </div>
-  {% else %}
-    <div class="video" >
-      <button 
-        class="js-modal-video" 
-        data-videoid={{ params.video.id}} 
-        data-videosrc={{ params.video.src }}
-      >
-        <div class="play-button">{% include "../icons/play.njk" %}</div>
-        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
-      </button>
-    </div>
-  {% endif %}
-
+  {{ video(params) }}
 </div>

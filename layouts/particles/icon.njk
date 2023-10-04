@@ -1,0 +1,6 @@
+{% macro icon(props) %}
+  <div class="icon">
+    {% include "icons/" + props.icon.name + ".njk" ignore missing %}
+    <p class="caption">{{ props.icon.caption }}</p>
+  </div>
+{% endmacro %}

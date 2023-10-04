@@ -1,0 +1,6 @@
+{% macro image(props) %}
+  <div class="image">
+    <img src="{{ props.image.src }}" alt="{{ props.image.alt }}" />
+    <p class="caption">{{ props.image.caption }}</p>
+  </div>
+  {% endmacro %}

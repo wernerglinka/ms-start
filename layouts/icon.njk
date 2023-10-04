@@ -15,8 +15,8 @@
     name: ''
     caption: ''
 #}
+{% from "sections/particles/icon.njk" import icon %}
 
 <div class="icon-wrapper section-inner">
-  {% include "../icons/" + params.icon.name + ".njk" ignore missing %}
-  <p class="caption">{{ params.icon.caption }}</p>
+  {{ icon(params) }}
 </div>

@@ -49,17 +49,12 @@
 
 
 
+{% from "sections/particles/text.njk" import text %}
+{% from "sections/particles/image.njk" import image %}
+{% from "sections/particles/ctas.njk" import ctas %}
+
 <div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
-  
-  {% include "sections/particles/text.njk" %}
-
-  {% include "sections/particles/ctas.njk" %}
-  
-  <div class="image {% if params.image.caption %}has-caption{% endif %}">
-    <img src="{{ params.image.src }}" alt="{{ params.image.alt }}" />
-    {% if params.image.caption %}
-      <p class="caption">{{ params.image.caption }}</p>
-    {% endif %}
-  </div><!-- /.image -->
-
+  {{ text(params) }}
+  {{ image(params) }}
+  {{ ctas(params) }}
 </div>

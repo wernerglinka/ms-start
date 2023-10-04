@@ -1,0 +1,12 @@
+{% macro lottie(props) %}
+  <div class="lottie">
+    <lottie-player 
+      src="{{ props.lottie.src }}" 
+      background="transparent"  
+      speed="1" 
+      {% if props.lottie.control.loop %}loop{% endif %} 
+      {% if props.lottie.control.autoplay %}autoplay{% endif %}
+      ></lottie-player>
+    <p class="caption">{{ props.lottie.caption }}</p>
+  </div>
+{% endmacro %}

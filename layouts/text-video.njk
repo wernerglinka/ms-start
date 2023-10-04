@@ -57,40 +57,12 @@
 
 
 
+{% from "sections/particles/text.njk" import text %}
+{% from "sections/particles/video.njk" import video %}
+{% from "sections/particles/ctas.njk" import ctas %}
+
 <div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
-  
-  {% include "sections/particles/text.njk" %}
-
-  {% include "sections/particles/ctas.njk" %}
-  
-  {% if params.video.inline %}
-    <div class="video inline">
-      <div class="inline-video-wrapper js-inline-video-wrapper">
-        <div class="close">{% include "../icons/x.njk" %}</div>
-        <div 
-          class="js-inline-video" 
-          data-videoid="{{ params.video.id }}" 
-          data-starttime="{{ params.video.start }}" 
-          data-endtime="{{ params.video.end }}"
-        ></div>
-      </div>
-    
-      <button class="video-trigger js-video-trigger">
-        <div class="play-button">{% include "../icons/play.njk" %}</div>
-        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
-      </button>
-    </div>
-  {% else %}
-    <div class="video" >
-      <button 
-        class="js-modal-video" 
-        data-videoid={{ params.video.id}} 
-        data-videosrc={{ params.video.src }}
-      >
-        <div class="play-button">{% include "../icons/play.njk" %}</div>
-        <img src="{{ params.video.tn }}" alt="{{ params.video.title }}">
-      </button>
-    </div>
-  {% endif %}
-
+  {{ text(params) }}
+  {{ video(params) }}
+  {{ ctas(params) }}
 </div><!-- /.text-video-wrapper -->

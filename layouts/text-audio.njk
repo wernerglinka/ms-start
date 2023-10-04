@@ -58,24 +58,12 @@
 
 
 
+{% from "sections/particles/text.njk" import text %}
+{% from "sections/particles/audio.njk" import audio %}
+{% from "sections/particles/ctas.njk" import ctas %}
+
 <div class="text-media-wrapper section-inner {% if params.isReverse %}is-reverse{% endif %}">
-  
-  {% include "sections/particles/text.njk" %}
-
-  {% include "sections/particles/ctas.njk" %}
-  
-  <div class="audio">
-    {% if params.hasImage %}
-      <div class="audio-image">
-        <img src="{{ params.image.src }}" alt="{{ params.image.alt }}">
-      </div><!-- /.audio-image -->
-    {% endif %}
-
-    <audio controls>
-      <source src={{params.audio.ogg}} type="audio/ogg"/>
-      <source src={{params.audio.mpeg}} type="audio/mpeg"/>
-      Your browser does not support the audio element.
-    </audio>
-  </div><!-- /.audio -->
-
+  {{ text(params) }}
+  {{ audio(params) }}
+  {{ ctas(params) }}
 </div>
