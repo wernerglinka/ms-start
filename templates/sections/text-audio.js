@@ -6,7 +6,5 @@ const image = require('./image');
 const merged = Object.assign(audio, image, text, ctas);
 // add directional property for media type section
 merged.isReverse = false;
-merged.hasCtas = false;
-merged.hasImage = false;
 
 module.exports = merged;
