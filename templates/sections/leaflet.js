@@ -1,10 +1,10 @@
 const leaflet = {
   "leaflet": {
-    "prefix": "",
-    "title": "",
-    "header": "",
-    "subtitle": "",
-    "prose": ""
+    "centerX": "",
+    "centerY": "",
+    "zoom": "",
+    "containerId": "",
+    "containerHeight": ""
   }
 };
 module.exports = leaflet;
