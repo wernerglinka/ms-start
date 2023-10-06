@@ -6,21 +6,20 @@
  * @params {*} none
  * @return {function} initializes a logo display
  */
- const lists = (function() {
+const lists = (function() {
   const init = () => {
-    if (document.querySelector(".js-logos")) {
-      logoLists();
-    }
+    logoLists();
   };
 
   const logoLists = () => {
+    console.log("logo lists yay");
     const allLogosLists = document.querySelectorAll(".js-logos");
     let viewportWidth = window.innerWidth;
     allLogosLists.forEach(logosList => {
-      if (logosList.offsetWidth > viewportWidth) {
-        logosList.parentElement.classList.remove("no-animation");
+      if (logosList.offsetWidth < viewportWidth) {
+        logosList.parentElement.classList.remove("animate");
       } else {
-        logosList.parentElement.classList.add("no-animation");
+        logosList.parentElement.classList.add("animate");
       }
     });
 
@@ -29,10 +28,10 @@
       viewportWidth = window.innerWidth;
 
       allLogosLists.forEach(logosList => {
-        if (logosList.offsetWidth > viewportWidth) {
-          logosList.parentElement.classList.remove("no-animation");
+        if (logosList.offsetWidth < viewportWidth) {
+          logosList.parentElement.classList.remove("animate");
         } else {
-          logosList.parentElement.classList.add("no-animation");
+          logosList.parentElement.classList.add("animate");
         }
       });
     });
@@ -43,7 +42,7 @@
     });  
   }
 
-
+  
   return { init };
 })();
 

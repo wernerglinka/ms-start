@@ -17,9 +17,6 @@
       width: fit-content;
       display: flex;
       position: relative;
-      transform: translate3d(0%, 0, 0);
-      animation: marquee 10s linear infinite;
-      animation-play-state: running;
     }
     
     .marquee:hover .logos-wrapper {
@@ -27,8 +24,10 @@
       transition-duration: 0.8s;
     }
 
-    .logos-wrapper.no-animation {
-      animation: none !important;
+    .logos-wrapper.animate {
+      transform: translate3d(0%, 0, 0);
+      animation: marquee 10s linear infinite;
+      animation-play-state: running;
     }
     
     .logos {
@@ -46,7 +45,7 @@
       }
     
       img {
-        max-width: var(--logo-width);
+        max-width: 100%;
         filter: grayscale(100%);
         opacity: 0.5;
         transition: all 0.3s ease-in-out;
@@ -214,12 +213,12 @@
   * Base styles for a grid
   */
   .grid-list {
-    max-width: 31rem;
+    max-width: 600px;
     margin: 0 auto;
     padding: 0;
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--logo-width), 1fr));
     gap: 0.4rem;
 
     li {
@@ -239,8 +238,8 @@
       }
 
       img {
-        width: 3rem;
-        height: 3rem;
+        width: var(--logo-width);
+        height: auto;
 
       }
     }

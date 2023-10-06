@@ -1,4 +1,7 @@
-<ul class="grid-list">
+<ul 
+  class="grid-list" 
+  style="--logo-width: {{ logoWidth ~ 'px'}}"
+>
   {% for select in selection %}
     <li class="{% if not select.url %}no-link{% endif %}">
       {% if select.url %}

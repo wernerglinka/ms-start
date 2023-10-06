@@ -1,6 +1,10 @@
 .image-wrapper {
-  & img {
+  img {
     width: 100%;
     height: auto;
+  }
+
+  .caption {
+    text-align: center;
   }
 }
