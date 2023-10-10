@@ -4,7 +4,19 @@ const leaflet = {
     "centerY": "",
     "zoom": "",
     "containerId": "",
-    "containerHeight": ""
+    "containerHeight": "",
+    "markers": [
+      { 
+        title: "",
+        latitute: "",
+        longitude: "",
+        content: {
+          title: "",
+          body: "",
+          link: ""
+        }
+      }
+    ]
   }
 };
 module.exports = leaflet;

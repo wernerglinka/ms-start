@@ -3,6 +3,7 @@ module.exports = {
     "ctas": [],
     "icon": [],
     "image": [],
+    "leaflet": ["load-leaflet"],
     "list": ["lists"],
     "lottie": [],
     "text" : ["modal-video"] ,
