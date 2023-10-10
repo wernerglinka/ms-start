@@ -1,19 +1,19 @@
 const leaflet = {
   "leaflet": {
-    "centerX": "",
-    "centerY": "",
+    "latitute": "",
+    "longitude": "",
     "zoom": "",
     "containerId": "",
     "containerHeight": "",
     "markers": [
       { 
-        title: "",
-        latitute: "",
-        longitude: "",
-        content: {
-          title: "",
-          body: "",
-          link: ""
+        "title": "",
+        "latitute": "",
+        "longitude": "",
+        "content": {
+          "title": "",
+          "body": "",
+          "link": ""
         }
       }
     ]
