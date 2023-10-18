@@ -1,0 +1,96 @@
+{#
+  All Blogposts
+  Renders a list of blogposts
+  Get the relevant blogposts fields from the blog collection
+  blogTitle, date, image, path
+
+  params: {
+    blockClass: string - optional class to add to the block
+    numberOfBlogs: number - the number of total blog posts
+    numberOfPages: number - number of pages to show
+    pageNumber: number - the current page number
+    pageLength: number - the number of posts to show per page
+    pageStart: number - the index of the first post to show
+  }
+  metadata: {
+    site: {
+      imagePrefix: string - path to images
+    }
+  } 
+#}
+
+{% from "../partials/card.njk" import card %}
+
+<div class="block block-all-blogposts {% if params.blockClass %} {{ params.blockClass }}{% endif %}">
+
+{% if params.numberOfPages > 1 %}
+  <ul class="blogs-pagination">
+    {% for i in range(0, params.numberOfPages) -%}
+      <li {% if ((i + 1) == params.pageNumber) %}class="active"{% endif %}>
+        {% if i == 0 %}
+          <a href="/blog/">1</a>
+        {% else %}
+          <a href="/blog/{{ i + 1 }}/">{{ i + 1 }}</a>
+        {% endif %}
+      </li>
+    {%- endfor %}
+  </ul>
+
+  <ul class="all-blogposts cards">
+    {% for blogPost in collections.blog %}
+
+      {% set startPage = params.pageStart %}
+      {% set endPage = startPage + params.pageLength %}
+
+      {% if loop.index > startPage  and loop.index <= endPage %}
+
+        {% set thisCard = {
+          title: blogPost.blogTitle,
+          prose: blogPost.excerpt,
+          thumbnail: blogPost.image.src,
+          link: "/" ~ blogPost.path,
+          horizontal: params.horizontal,
+          date: blogPost.date
+        } %}  
+        <li class="simple-card{% if params.horizontal %} is-horizontal{% endif %}">
+          {{ card(thisCard, metadata.site.imagePrefix) }}
+        </li>
+      {% endif %}
+      
+    {% endfor %}
+  </ul>
+
+  <ul class="blogs-pagination">
+    {% for i in range(0, params.numberOfPages) -%}
+      <li {% if ((i + 1) == params.pageNumber) %}class="active"{% endif %}>
+        {% if i == 0 %}
+          <a href="/blog/">1</a>
+        {% else %}
+          <a href="/blog/{{ i + 1 }}/">{{ i + 1 }}</a>
+        {% endif %}
+      </li>
+    {%- endfor %}
+  </ul>
+{% else %}
+
+  <ul class="all-blogposts cards">
+  {% for blogPost in collections.blog %}
+    {% set thisCard = {
+      title: blogPost.blogTitle,
+      prose: blogPost.excerpt,
+      thumbnail: blogPost.image.src,
+      link: "/" ~ blogPost.path,
+      horizontal: params.horizontal,
+      date: blogPost.date
+    } %}  
+    <li class="simple-card{% if params.horizontal %} is-horizontal{% endif %}">
+      {{ card(thisCard, metadata.site.imagePrefix) }}
+    </li> 
+  {% endfor %}
+  </ul>
+
+
+
+{% endif %}
+
+</div>

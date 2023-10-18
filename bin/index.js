@@ -163,6 +163,7 @@ function lineSpacer() {
  * @description displays a welcome message
  */
 async function init(projectName) {
+	await loadInquirer();
 	const boxen = await loadBoxen();
 	const welcomeMsg = color.bold.green("Welcome to Metalsmith First!\nms-start will help you get started with Metalsmith and structured content.");
 
@@ -177,6 +178,16 @@ async function init(projectName) {
 		lineSpacer();
 		return;	
 	}
+
+	// ask if we should add blogging functionality
+	const { addBlog } = await inquirer.prompt([
+		{
+			type: 'confirm',
+			name: 'addBlog',
+			message: 'Do you want to add blogging functionality?',
+			default: false
+		}
+	]);
 
 	// Clone the repository
 	execSync(`git clone ${repoUrl} ${projectName}`);
@@ -196,6 +207,23 @@ async function init(projectName) {
 	// Initialize a new git repository
 	execSync('git init');
 	userMsg(`Initialized new git repository`, true);
+
+	// add blog functionality if requested
+	if (addBlog) {
+		await addBlogFunctionality();
+		userMsg(`Added blogging functionality`, true);
+	}
+}
+
+async function addBlogFunctionality() {
+	const msPath = process.cwd(); // path to the site we are building
+	const libPath = getDirName(__dirname); // path to the root of this tool
+
+	//get the blog template url
+	const blogLandingPage = `${libPath}/blog-functionality/blog-list.njk`;
+	const target = `${process.cwd()}/lib/layouts/blog-list.njk`;
+	copySync(blogLandingPage, target);
+	userMsg(`blog-list.njk was written to /lib/layouts/`, true);
 }
 
 /**
@@ -481,8 +509,6 @@ function kebabToCamel(input) {
 async function getSections(libPath, msPath) {
 	const sections = [];
 	const sectionTemplates = readdirSync(`${libPath}/templates/sections`).map(item => item.replace('.js', ''));
-
-
 
 	let addAnotherSection = true;
 
@@ -855,7 +881,7 @@ program
 	.description('Add one or more pages with frontmatter scaffold to site')
 	.action(addPages);
 
-	program
+program
 	.command('addSectionTo pageName')
 	.description('Add one or more additional sections to a page')
 	.action(addSectionTo);
