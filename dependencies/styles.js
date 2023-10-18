@@ -1,5 +1,6 @@
 module.exports = {
     "audio": ["audio"],
+    "blog-banner": ["blog-posts"],
     "icon": ["icon"],
     "image": ["image"],
     "leaflet": ["leaflet"],

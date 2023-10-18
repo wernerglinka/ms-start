@@ -1,0 +1,4 @@
+.blog-banner {
+  padding-top: var(--header-height);
+  margin-top: calc(-1 * var(--header-height));
+}
