@@ -1,6 +1,7 @@
 module.exports = {
   "layout": "blocks.njk",
   "draft": false,
+  "isBlogpost": false,
   "bodyClasses": "",
   "nav": {
     "label":"",

@@ -1,0 +1,15 @@
+{% macro blogAttribution(props) %}
+
+  {% if props.author or props.date %}
+    <div class="blog-properties">
+    {% if props.author %}
+      <span class="author">Written by {{ props.author }} </span>
+    {% endif %}
+    {% if props.author or props.date %} on {% endif %}
+    {% if props.date %}
+      <time class="date" datetime="{{ props.date }}">{{ props.date | blogDate }}</time>
+    {% endif %}
+    </div>
+  {% endif %}
+
+{% endmacro %}

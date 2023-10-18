@@ -1,0 +1,49 @@
+{#
+  Blog Header
+  Renders a blog header with optional CTAs
+  
+  params: {
+    text: {
+      prefix: string - prefix to the title (optional)
+      title: string - title of the blog post (optional)
+      header: string - header of the blog post, e.g. "h1", "h2", etc. (optional)
+      subtitle: string - subtitle of the blog post (optional)
+      prose: string - prose of the blog post (optional)
+    }
+    ctas: {
+      url: "",
+      label: "",
+      isExternal: true,
+      isButton: true,
+      buttonStyle: "primary"
+    }
+  }
+
+  blogProps: {
+    date: date,
+    author: author
+  }
+
+  YAML example:
+  hasCtas: false
+  text:
+    prefix: ""
+    title: ""
+    header: ""
+    subtitle: ""
+    prose: ""
+  ctas:
+    - url: ""
+      label: ""
+      isExternal: true
+      isButton: true
+      buttonStyle: "primary"
+#}
+
+{% from "sections/particles/text.njk" import text %}
+{% from "sections/particles/blog-attribution.njk" import blogAttribution %}
+
+<div class="text-wrapper section-inner">
+  {{ text(params) }}
+  {{ blogAttribution(blogProps) }}
+</div>

@@ -14,6 +14,7 @@ let boxen;
 
 // get the initial page object
 const page = require('../templates/page');
+const { get } = require('http');
 
 /**
  * Icons
@@ -219,9 +220,9 @@ async function addBlogFunctionality() {
 	const msPath = process.cwd(); // path to the site we are building
 	const libPath = getDirName(__dirname); // path to the root of this tool
 
-	//get the blog template url
+	//get the blog template url and copy to the project layouts folder
 	const blogLandingPage = `${libPath}/blog-functionality/blog-list.njk`;
-	const target = `${process.cwd()}/lib/layouts/blog-list.njk`;
+	const target = `${msPath}/lib/layouts/blog-list.njk`;
 	copySync(blogLandingPage, target);
 	userMsg(`blog-list.njk was written to /lib/layouts/`, true);
 }
@@ -234,6 +235,7 @@ async function addBlogFunctionality() {
  * @description writes the pages to the src folder
  */
 async function addPages() {
+	await loadInquirer();
 	const boxen = await loadBoxen();
 
 	const msPath = process.cwd(); // path to the site we are building
@@ -246,12 +248,29 @@ async function addPages() {
 	let pageParams = {};
 
 	while (buildPages) {
-		pageParams = await collectPageData(pageParams);
+		// is this a blog page?
+		const { isBlogPage } = await inquirer.prompt([
+			{
+				type: 'confirm',
+				name: 'isBlogPage',
+				message: 'Is this a blog page?',
+				default: false
+			}
+		]);
+
+		page.isBlogpost = isBlogPage;
+
+		pageParams = await collectPageData(pageParams, isBlogPage);
 		page.sections = await handleSectionData(pageParams, libPath, msPath);
 
 		// write page file
 		const yamlData = createFrontmatterForPage(page);
 		const target = `${msPath}${pageParams.pagesPath}${pageParams.pageFileName}.md`;
+
+		// check if file path exists and create it if it doesn't
+		if (!existsSync(`${msPath}${pageParams.pagesPath}`)) {
+			mkdirSync(`${msPath}${pageParams.pagesPath}`, { recursive: true });
+		}
 		writeFileSync(target, yamlData);
 		numberOfPages++;
 		userMsg(`Source page ${pageParams.pageFileName}.md was written to ${pageParams.pagesPath}.`, true);
@@ -380,13 +399,66 @@ function buildDefaults(pageParams) {
 	};
 }
 
+async function getBlogData() {
+	await loadInquirer();
+
+	return blogParams = await inquirer.prompt([
+		{
+			name: 'blogTitle',
+			type: 'input',
+			message: 'Title for the blog page?',
+			default: ""
+		},
+		{
+			name: 'blogDate',
+			type: 'input',
+			message: 'Date for the blog page?',
+			default: () => {
+				const today = new Date();
+				return `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+			}
+		},
+		{
+			name: 'blogAuthor',
+			type: 'input',
+			message: 'Author for the blog page?',
+			default: ""
+		},
+		{
+			name: 'blogImageSource',
+			type: 'input',
+			message: 'Image source for the blog page?',
+			default: ""
+		},
+		{
+			name: 'blogImageAlt',
+			type: 'input',
+			message: 'Image alt for the blog page?',
+			default: ""
+		},
+		{
+			name: 'blogImageCaption',
+			type: 'input',
+			message: 'Image caption for the blog page?',
+			default: ""
+		},
+		{
+			name: 'blogExcerpt',
+			type: 'input',
+			message: 'Excerpt for the blog page?',
+			default: ""
+		}
+	]);
+}
+
+
 /**
  * @function collectPageData
  * @param {*} pageParams
  * @returns pageParams
  * @description collects data from the user to build the page object
  */
-async function collectPageData(pageParams) {
+async function collectPageData(pageParams, isBlogPage) {
 	await loadInquirer();
 	let goOn = false;
 
@@ -398,7 +470,7 @@ async function collectPageData(pageParams) {
 				type: 'input',
 				name: 'pagesPath',
 				message: 'Path to store the page?',
-				default: defaults.pagesPath,
+				default: isBlogPage ? `${defaults.pagesPath}blog/` : defaults.pagesPath,
 				validate: (input) => {
 					if (!input.trim().startsWith('/src/'))  {
 						return 'pagesPath must start with "/src/"';
@@ -480,15 +552,21 @@ async function collectPageData(pageParams) {
 			}
 		]);
 
+		// if this is a blog page, add the blog properties
+		if (isBlogPage) {
+			blogParams = await getBlogData();
+			pageParams = {...pageParams, ...blogParams};
+		}
+
 		// check if file already exists and prompt for new file name
-		if (checkFileExists(`${pageParams.pagesPath}/${pageParams.pageFileName}`)) {
+		if (checkFileExists(`${pageParams.pagesPath}/${pageParams.pageFileName}.md`)) {
 			const pageName = await askForPageName(defaults, pageParams);
 			pageParams.pageFileName = pageName.pageFileName;
 		}
 
-		mergePageParams(pageParams);
+		mergePageParams(pageParams, isBlogPage);
 
-		displayPageParams(pageParams);
+		displayPageParams(pageParams, isBlogPage);
 
 		goOn = (await confirmDetails()).proceed;
 	}
@@ -829,9 +907,14 @@ function createFrontmatterForPage(pageObject) {
  * @returns void
  * @description displays the pageParams object
  */
-function displayPageParams(pageParams) {
+function displayPageParams(pageParams, isBlogPage) {
 
-	userHint('Your page properties:');
+	if (isBlogPage) {
+		userHint('Your blog page properties:');
+	}
+	else {
+		userHint('Your page properties:');
+	}
 	userHint(`- Pages Path: ${pageParams.pagesPath}`);
 	userHint(`- Page Nav Label: ${pageParams.pageNavLabel}`);
 	userHint(`- Page Nav Order: ${pageParams.pageNavOrder}`);
@@ -842,6 +925,16 @@ function displayPageParams(pageParams) {
 	userHint(`- Meta Title: ${pageParams.metaTitle}`);
 	userHint(`- Meta Description: ${pageParams.metaDescription}`);
 	userHint(`- Canonical URL: ${pageParams.canonicalOverwrite}`);
+
+	if (isBlogPage) {
+		userHint(`- Blog Title: ${pageParams.blogTitle}`);
+		userHint(`- Blog Date: ${pageParams.blogDate}`);
+		userHint(`- Blog Author: ${pageParams.blogAuthor}`);
+		userHint(`- Blog Image Source: ${pageParams.blogImageSource}`);
+		userHint(`- Blog Image Alt: ${pageParams.blogImageAlt}`);
+		userHint(`- Blog Image Caption: ${pageParams.blogImageCaption}`);
+		userHint(`- Blog Excerpt: ${pageParams.blogExcerpt}`);
+	}
 }
 
 /**
@@ -850,7 +943,7 @@ function displayPageParams(pageParams) {
  * @returns void
  * @description merges the pageParams into the page object
  */
-function mergePageParams(pageParams) {
+function mergePageParams(pageParams, isBlogPage) {
 	page.layout = pageParams.pageTemplate;
 	page.nav.label = pageParams.pageNavLabel;
 	page.nav.order = pageParams.pageNavOrder;
@@ -859,6 +952,17 @@ function mergePageParams(pageParams) {
 	page.seo.title = pageParams.metaTitle;
 	page.seo.description = pageParams.metaDescription;
 	page.seo.canonicalOverwrite = pageParams.canonicalOverwrite;
+
+	if (isBlogPage) {
+		page.blogTitle = pageParams.blogTitle;
+		page.date = pageParams.blogDate;
+		page.author = pageParams.blogAuthor;
+		page.image = {};
+		page.image.src = pageParams.blogImageSource;
+		page.image.alt = pageParams.blogImageAlt;
+		page.image.caption = pageParams.blogImageCaption;
+		page.excerpt = pageParams.blogExcerpt;
+	}
 }
 
 /**
